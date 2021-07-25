@@ -100,14 +100,14 @@ function buildAndShowHomeHTML (categories) { /** receives all the categories fro
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
     function (homeHtml) {
-      switchMenuToActive();
+      // switchMenuToActive();
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
       // chooseRandomCategory(categories);
       // var chosenCategoryShortName = 
       var chosenCategoryShortName = 
-          insertProperty("'" + chooseRandomCategory(categories) + "'");
+          insertProperty(chooseRandomCategory(categories).propToReplace, chosenCategoryShortName, randomCategoryShortName);
 
         // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
         // chosen category from STEP 2. Use existing insertProperty function for that purpose.
@@ -121,7 +121,7 @@ function buildAndShowHomeHTML (categories) { /** receives all the categories fro
         // it into the home html snippet.
         // var homeHtmlToInsertIntoMainPage = 
       var homeHtmlToInsertIntoMainPage = 
-          insertProperty(homeHtml, homeHtmlToInsertIntoMainPage, chosenCategoryShortName);
+          insertProperty(homeHtml.propToReplace, homeHtmlToInsertIntoMainPage, chosenCategoryShortName);
         //               string,      propName,            propValue
         // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
         // Use the existing insertHtml function for that purpose. Look through this code for an example
@@ -212,6 +212,7 @@ function buildCategoriesViewHtml(categories,
                      short_name);
     finalHtml += html;
   }
+  console.log(short_name);
 
   finalHtml += "</section>";
   return finalHtml;
